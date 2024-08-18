@@ -1,20 +1,11 @@
 import * as React from 'react';
-import { View, Text, Button, TextInput, FlatList, TouchableOpacity, StyleSheet, SectionList, Linking } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import Icon from 'react-native-ico-material-design';
-import { FAB, useTheme } from 'react-native-paper';
-import { Checkbox } from 'react-native-paper';
+import { View, Text, Button, TouchableOpacity, SectionList, Linking } from 'react-native';
+import { useSelector } from 'react-redux';
 import bookmarkListStyles from './Styles';
-import Modal from "react-native-modal";
-import ModalBottomSheet from '../../components/modal/ModalBottomSheet';
-import AddNewBookmark from './AddNewBookmark';
-import { updateBookmark } from '../../features/bookmarkList/BookmarkListSlice';
 import ThemeLight from '../../themes/ThemeLight';
 
 
 const ItemForRender = ({ navigation, item, styles, index }) => {
-    const dispatch = useDispatch()
-    const [selected, setSelected] = React.useState(!item.isActive);
     const handlePress = () => {
         Linking.openURL(item.url).catch((err) => console.error("Failed to open URL:", err));
     };
@@ -29,17 +20,6 @@ const ItemForRender = ({ navigation, item, styles, index }) => {
         </TouchableOpacity>
     );
 };
-
-const FloatingAddButton = ({ navigation, styles, onPress }) => (
-    <FAB
-        theme={ThemeLight}
-        icon={() => <Icon name="add-plus-button" color={ThemeLight.colors.buttonColor} style={{ marginLeft: 3, marginTop: 1 }} />}
-        style={styles.fab}
-        onPress={onPress}
-    />
-);
-
-
 
 const BookmarkList = ({ navigation, route }) => {
     const bookmarkList = useSelector((state) => state.bookmark.listOfBookmark)

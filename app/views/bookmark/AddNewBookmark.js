@@ -68,22 +68,9 @@ const AddNewBookmark = ({ navigation }) => {
         navigation.goBack();
     };
 
-    const selectDropDown = () => {
-
-    }
     const toggleModal = () => {
-        console.warn("oppp")
         setTextInputVisible(!isTextInputVisible);
     };
-
-    const onPressDone = () => {
-        toggleModal()
-    }
-
-    const modalContent = () => {
-        return (<View style={{ backgroundColor: "pink", height: 10 }}></View>)
-    }
-
 
     return (
         <View style={styles.container}>
