@@ -4,19 +4,10 @@ import { Provider } from 'react-redux';
 import { store } from './app/store/Store';
 import { PaperProvider, adaptNavigationTheme } from 'react-native-paper';
 import ThemeLight from './app/themes/ThemeLight';
-import { ThemeDark } from './app/themes/ThemeDark';
-import { useColorScheme } from 'react-native';
-import CustomNativeModule from './CustomModule.js'
-import { loadCategories } from './app/features/category/CategorySlice.js';
-loadCategories
-const App = () => {
 
-  const scheme = useColorScheme();
+const App = () => {
   const { LightTheme } = adaptNavigationTheme({ reactNavigationLight: ThemeLight });
-  const { DarkTheme } = adaptNavigationTheme({ reactNavigationDark: ThemeDark });
-  // const appTheme = scheme === 'dark' ? DarkTheme : LightTheme
   const appTheme = LightTheme
-  //const appTheme = scheme === 'dark' ? LightTheme : LightTheme
   return (
     <Provider store={store} >
       <PaperProvider>

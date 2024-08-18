@@ -9,7 +9,6 @@ const BookmarkDetails = ({ route, navigation }) => {
             <Text style={styles.text}>Title: {item.title}</Text>
             <Text style={styles.text}>URL: {item.url}</Text>
             <Text style={styles.text} >Category: {item.category}</Text>
-            {/* <Button title="Go Back" onPress={() => navigation.goBack()} /> */}
         </View>
     );
 };
