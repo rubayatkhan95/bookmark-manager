@@ -7,12 +7,10 @@ import ThemeLight from './app/themes/ThemeLight';
 import { ThemeDark } from './app/themes/ThemeDark';
 import { useColorScheme } from 'react-native';
 import CustomNativeModule from './CustomModule.js'
-
+import { loadCategories } from './app/features/category/CategorySlice.js';
+loadCategories
 const App = () => {
-  // useEffect(() => {
-  //   // Call the native method when the component mounts
-  //   CustomNativeModule.show("Sending Text from JavaScript Showing Text from Android");
-  // }, []);
+
   const scheme = useColorScheme();
   const { LightTheme } = adaptNavigationTheme({ reactNavigationLight: ThemeLight });
   const { DarkTheme } = adaptNavigationTheme({ reactNavigationDark: ThemeDark });

@@ -43,7 +43,7 @@ target 'BookmarkManager' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'MediQTest' do
+  target 'BookmarkTest' do
     inherit! :complete
     # Pods for testing
   end

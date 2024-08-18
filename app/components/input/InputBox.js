@@ -8,9 +8,8 @@ const InputBox = ({ value, setValue, label }) => {
             label={label}
             mode="outlined"
             value={value}
-            style={{ height: 80, backgroundColor: "white" }}
+            style={{ height: 80, marginTop:10}}
             onChangeText={setValue}
-            contentStyle={{ backgroundColor: ThemeLight.colors.primaryContainer }}
             theme={ThemeLight}
         />
     );
