@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.bookmarkmanager"
+    namespace "com.bookmarkapp"
     defaultConfig {
-        applicationId "com.bookmarkmanager"
+        applicationId "com.bookmarkapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

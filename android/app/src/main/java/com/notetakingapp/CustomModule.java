@@ -1,4 +1,4 @@
-package com.bookmarkmanager;
+package com.bookmarkapp;
 
 import android.widget.Toast;
 

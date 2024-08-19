@@ -1,4 +1,4 @@
-package com.bookmarkmanager;
+package com.bookmarkapp;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
