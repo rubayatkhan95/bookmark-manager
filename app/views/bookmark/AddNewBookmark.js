@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextInput } from 'react-native-paper';
 import { addBookmark } from '../../features/bookmarkList/BookmarkListSlice';
@@ -8,6 +8,7 @@ import ThemeLight from '../../themes/ThemeLight';
 import InputBox from '../../components/input/InputBox';
 import SelectDropdown from 'react-native-select-dropdown'
 import Icon from 'react-native-ico-material-design';
+//https://ico.simpleness.org/pack/material-design
 
 const AddNewBookmark = ({ navigation }) => {
     const [title, setTitle] = React.useState('');
@@ -51,7 +52,6 @@ const AddNewBookmark = ({ navigation }) => {
                 };
                 dispatch(addCategory(newCategory));
             }
-
             clearState()
             navigation.goBack();
         }
@@ -63,6 +63,7 @@ const AddNewBookmark = ({ navigation }) => {
         setCategory('');
         setTextInputVisible(false);
     }
+
     const handleCancel = () => {
         clearState()
         navigation.goBack();
@@ -73,10 +74,9 @@ const AddNewBookmark = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <InputBox label="Title" value={title} setValue={setTitle} />
             <InputBox label="URL" value={url} setValue={setUrl} />
-
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 20 }}>
                 <SelectDropdown
                     data={categoryList}
@@ -86,21 +86,17 @@ const AddNewBookmark = ({ navigation }) => {
                     disabled={isTextInputVisible}
                     renderButton={(selectedItem, isOpened) => {
                         return (
-                            <View style={styles.dropdownButtonStyle}>
-                                {/* {selectedItem && (
-            <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
-          )} */}
+                            <View style={[styles.dropdownButtonStyle, {backgroundColor: isTextInputVisible ? ThemeLight.colors.onSurfaceDisabled : ThemeLight.colors.primaryContainer,}]}>
                                 <Text style={styles.dropdownButtonTxtStyle}>
                                     {(selectedItem && selectedItem.title) || 'Select Cetegory'}
                                 </Text>
-                                {/* <Icon name={isOpened ? 'chevron-up' : 'chevron-down'} style={styles.dropdownButtonArrowStyle} /> */}
+                                <Icon name={isOpened ? 'drop-up-arrow' : 'drop-down-arrow'}   style={styles.dropdownButtonArrowStyle} />
                             </View>
                         );
                     }}
                     renderItem={(item, index, isSelected) => {
                         return (
                             <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: '#D2D9DF' }) }}>
-                                {/* <Icon name={item.icon} style={styles.dropdownItemIconStyle} /> */}
                                 <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
                             </View>
                         );
@@ -131,7 +127,7 @@ const AddNewBookmark = ({ navigation }) => {
                 </Button>
             </View>
 
-        </View>
+        </ScrollView>
     );
 };
 

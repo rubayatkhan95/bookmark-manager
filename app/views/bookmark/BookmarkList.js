@@ -40,6 +40,7 @@ const BookmarkList = ({ navigation, route }) => {
 
                     });
                 }}
+                color={ThemeLight.colors.buttonColor}
             />
             <SectionList
                 sections={sectionList}
