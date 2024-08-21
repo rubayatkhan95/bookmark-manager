@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextInput } from 'react-native-paper';
-import { addBookmark } from '../../features/bookmarkList/BookmarkListSlice';
+import { addBookmark, saveBookmarks } from '../../features/bookmarkList/BookmarkListSlice';
 import { addCategory } from '../../features/category/CategorySlice';
 import ThemeLight from '../../themes/ThemeLight';
 import InputBox from '../../components/input/InputBox';
@@ -36,6 +36,16 @@ const AddNewBookmark = ({ navigation }) => {
         return true;
     };
 
+    const saveBookmarkToLocalStorage = (newBookmark) => {
+        dispatch(saveBookmarks(newBookmark))
+            .then(() => {
+                console.log('Bookmarks have been saved!');
+            })
+            .catch((error) => {
+                console.error('Failed to save bookmarks:', error);
+            });
+    }
+
     const handleSave = () => {
         if (validateInputs()) {
             const newBookmark = {
@@ -45,6 +55,7 @@ const AddNewBookmark = ({ navigation }) => {
                 category: category.trim(),
             };
             dispatch(addBookmark(newBookmark));
+            saveBookmarkToLocalStorage(newBookmark)
             if (isTextInputVisible && category.trim().length > 0) {
                 const newCategory = {
                     id: categoryList.length + 1,
@@ -57,7 +68,7 @@ const AddNewBookmark = ({ navigation }) => {
         }
     };
 
-    const clearState = ()=>{
+    const clearState = () => {
         setTitle('');
         setUrl('');
         setCategory('');
@@ -86,11 +97,11 @@ const AddNewBookmark = ({ navigation }) => {
                     disabled={isTextInputVisible}
                     renderButton={(selectedItem, isOpened) => {
                         return (
-                            <View style={[styles.dropdownButtonStyle, {backgroundColor: isTextInputVisible ? ThemeLight.colors.onSurfaceDisabled : ThemeLight.colors.primaryContainer,}]}>
+                            <View style={[styles.dropdownButtonStyle, { backgroundColor: isTextInputVisible ? ThemeLight.colors.onSurfaceDisabled : ThemeLight.colors.primaryContainer, }]}>
                                 <Text style={styles.dropdownButtonTxtStyle}>
                                     {(selectedItem && selectedItem.title) || 'Select Cetegory'}
                                 </Text>
-                                <Icon name={isOpened ? 'drop-up-arrow' : 'drop-down-arrow'}   style={styles.dropdownButtonArrowStyle} />
+                                <Icon name={isOpened ? 'drop-up-arrow' : 'drop-down-arrow'} style={styles.dropdownButtonArrowStyle} />
                             </View>
                         );
                     }}

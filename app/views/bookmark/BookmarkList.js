@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { View, Text, Button, TouchableOpacity, SectionList, Linking } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import bookmarkListStyles from './Styles';
 import ThemeLight from '../../themes/ThemeLight';
+import { useEffect } from 'react';
+import { loadBookmarks } from '../../features/bookmarkList/BookmarkListSlice';
 
 
 const ItemForRender = ({ navigation, item, styles, index }) => {
@@ -22,11 +24,21 @@ const ItemForRender = ({ navigation, item, styles, index }) => {
 };
 
 const BookmarkList = ({ navigation, route }) => {
-    const bookmarkList = useSelector((state) => state.bookmark.listOfBookmark)
-    const categoryList = useSelector((state) => state.category.listOfCategory)
+    const dispatch = useDispatch()
+    const bookmarkList = useSelector((state) => state.bookmark.listOfBookmark) || []
+    const categoryList = useSelector((state) => state.category.listOfCategory) || [];
+
+    console.log("categoryList:", categoryList);
+    console.log("bookmarkList:", bookmarkList);
+    console.log("sectionList:", sectionList);
+    useEffect(()=>{
+        console.log("here")
+        dispatch(loadBookmarks())
+    }, [dispatch])
+
     const sectionList = categoryList.map(category => ({
         title: category.title,
-        data: bookmarkList.filter(bookmark => bookmark.category === category.title)
+        data: (bookmarkList || []).filter(bookmark => bookmark.category === category.title)
     })).filter(section => section.data.length > 0);
     const styles = bookmarkListStyles()
 
